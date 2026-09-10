@@ -24,6 +24,12 @@ namespace INF164_Project2026
             PlaylistDate = playlistDate;
             LoadSongs();
         }
+        
+         // Create bindinglist for the songs 
+         BindingList <Song> SongList = new BindingList <Song>();
+
+         // to show a form, a new instance of that form must be created
+         frmAddSong myForm = new frmAddSong();
 
         private void Playlist_Load(object sender, EventArgs e)
         {
@@ -199,5 +205,18 @@ namespace INF164_Project2026
                 SetRandomCoverColor();
             }
         }
+           private void btnAdd_Click(object sender, EventArgs e)
+           {       
+                myForm.ShowDialog();
+
+               //transfer data from addsong form to main form.
+                SongList.Add(myForm.NewSong);
+             }
+
+            private void btnDelete_Click(object sender, EventArgs e)
+           {
+              int iSelectedIndex = dgvSongs.CurrentCell.RowIndex;
+              SongList.RemoveAt(iSelectedIndex);
+           }
     }
 }
